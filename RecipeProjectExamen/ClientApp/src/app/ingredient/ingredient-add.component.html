@@ -1,0 +1,31 @@
+<h1 id="tableLabel">Add user</h1>
+
+
+<table class="example-full-width" cellspacing="0">
+  <tr>
+    <td>
+      <mat-form-field class="example-full-width">
+        <mat-label>name</mat-label>
+        <input matInput [(ngModel)]="ingredient.name" />
+      </mat-form-field>
+    </td>
+  </tr>
+  <tr>
+
+  <tr>
+    <td>
+      <mat-form-field class="example-full-width">
+        <mat-label>details</mat-label>
+        <input matInput [(ngModel)]="ingredient.details" />
+      </mat-form-field>
+    </td>
+  </tr>
+
+  
+
+
+</table>
+
+<div class="example-button-row">
+  <button mat-raised-button color="accent" (click)="saveIngredient()">Save Ingredient</button>
+</div>

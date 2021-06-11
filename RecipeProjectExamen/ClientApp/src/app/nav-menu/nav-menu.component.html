@@ -1,0 +1,53 @@
+<header>
+
+  
+ 
+
+  <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+    <div class="container">
+      
+      <a class="navbar-brand" [routerLink]="['/']">Sweet Stuff</a>
+      <button class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target=".navbar-collapse"
+              aria-label="Toggle navigation"
+              [attr.aria-expanded]="isExpanded"
+              (click)="toggle()">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="navbar-collapse collapse d-sm-inline-flex justify-content-end"
+           [ngClass]="{ show: isExpanded }">
+        <ul class="navbar-nav flex-grow">
+          <li class="nav-item"
+              [routerLinkActive]="['link-active']"
+              [routerLinkActiveOptions]="{ exact: true }">
+            <a class="nav-link text-dark" [routerLink]="['/']">Home</a>
+          </li>
+          <div *ngIf="test">
+            <div *ngIf="loggedInUser.id == 'f0999877-5ccf-40c6-99ca-76227a0f9ef1'">
+              <li class="nav-item" [routerLinkActive]="['link-active']">
+                <a class="nav-link text-dark" [routerLink]="['/recipes']">Recipes</a>
+              </li>
+            </div>
+            </div>
+            <div *ngIf="!test">
+              <li class="nav-item" [routerLinkActive]="['link-active']">
+                <a class="nav-link text-dark" [routerLink]="['/user-add']">Register</a>
+              </li>
+            </div>
+            <div *ngIf="!test">
+              <li class="nav-item" [routerLinkActive]="['link-active']">
+                <a class="nav-link text-dark" [routerLink]="['/logIn']">Log In</a>
+              </li>
+            </div>
+            <div *ngIf="test">
+              <li class="nav-item" [routerLinkActive]="['link-active']">
+                <a class="nav-link text-dark" (click)='logOut()'><button mat-button style="background-color:white; border:0px"> ({{loggedInUser.name}}) Log Out</button></a>
+              </li>
+            </div>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>

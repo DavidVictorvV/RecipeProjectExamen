@@ -1,0 +1,47 @@
+
+<h1 id="tableLabel">Update recipe</h1>
+
+
+
+
+<table class="example-full-width" cellspacing="0">
+
+
+  <tr>
+    <td>
+      <mat-form-field class="example-full-width">
+        <mat-label>recipeID</mat-label>
+        <input matInput [(ngModel)]="ingredientData.recipeID" />
+      </mat-form-field>
+    </td>
+  </tr>
+  <tr>
+
+  <tr>
+    <td>
+      <mat-form-field class="example-full-width">
+        <mat-label>ingredientID</mat-label>
+        <input matInput [(ngModel)]="ingredientData.ingredientID" />
+      </mat-form-field>
+    </td>
+  </tr>
+  <tr>
+
+  <tr>
+    <td>
+      <mat-form-field class="example-full-width">
+        <mat-label>quantity</mat-label>
+        <input matInput [(ngModel)]="ingredientData.quantity" />
+      </mat-form-field>
+    </td>
+  </tr>
+  <tr>
+
+
+
+</table>
+
+<div class="example-button-row">
+  <button mat-raised-button color="accent" (click)="updateIngredientData()">Save ingredientData</button>
+</div>
+

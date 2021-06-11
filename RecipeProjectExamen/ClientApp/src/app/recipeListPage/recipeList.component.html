@@ -1,0 +1,60 @@
+<h1 id="tableLabel">Recipe List</h1>
+
+
+
+
+<style>
+  div.gallery {
+    background: darkgray;
+    margin: 5px;
+    border: 1px solid #ccc;
+    float: left;
+    width: 200px;
+    text-align: center;
+    color: black;
+  }
+
+    div.gallery:hover {
+      border: 1px solid #777;
+    }
+
+
+  div.desc {
+    padding: 15px;
+    text-align: center;
+    color: black
+  }
+
+  div.rating {
+    padding: 15px;
+    text-align: center;
+    color: black;
+  }
+</style>
+<span *ngIf="test">
+  <button class="btn btn-primary" [routerLink]="['/recipe-add']">+</button>
+</span>
+<br />
+<tr *ngFor="let recipe of recipes">
+  <a [routerLink]="['/recipeList-read',recipe.id]">
+    <div class="gallery">
+      {{recipe.recipeName}}<br />
+      <img src="{{recipe.imageLink}}" width="180" height="180">
+      <div class="desc">{{recipe.recipeSummary}}</div>
+      <div class="rating">
+        <div *ngIf="average(recipe) == 0 || average(recipe) == 'empty'">
+          <b>No ratings yet...</b>
+        </div>
+        <div *ngIf="average(recipe) != 0 && average(recipe) && average(recipe) != 'empty' ">
+          <span *ngFor='let in of counter(average(recipe)) ;let i = index'>
+            <i class="fa fa-star"></i>
+          </span>
+        </div>
+      </div>
+    </div>
+  </a>
+</tr>
+
+
+
+

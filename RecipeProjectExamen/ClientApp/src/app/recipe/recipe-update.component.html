@@ -1,0 +1,68 @@
+
+<h1 id="tableLabel">Update recipe</h1>
+
+
+
+
+<table  class="example-full-width" cellspacing="0">
+
+
+  <tr>
+    <td>
+      <mat-form-field class="example-full-width">
+        <mat-label>Recipe Name</mat-label>
+        <input matInput [(ngModel)]="recipe.recipeName" />
+      </mat-form-field>
+      Current Img:
+
+    </td>
+  </tr>
+  <tr>
+
+    <td>
+      <mat-form-field class="example-full-width">
+        <mat-label>Image link</mat-label>
+        <input matInput [(ngModel)]="recipe.imageLink" />
+      </mat-form-field>
+      <img [src]="recipe.imageLink" width="100" height="100" />
+    </td>
+  </tr>
+  <tr>
+  <tr>
+    <td>
+      <mat-form-field class="example-full-width">
+        <mat-label>Recipe Summary</mat-label>
+        <input matInput [(ngModel)]="recipe.recipeSummary" />
+      </mat-form-field>
+    </td>
+  </tr>
+  <tr>
+    <td>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Recipe Details</mat-label>
+        <textarea
+                    cdkTextareaAutosize
+            #autosize="cdkTextareaAutosize"
+            cdkAutosizeMinRows="1"
+            cdkAutosizeMaxRows="5"
+                  matInput [(ngModel)]="recipe.recipeDetails" ></textarea>
+      </mat-form-field>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <mat-form-field class="example-full-width">
+        <mat-label>Average Time</mat-label>
+        <input matInput type="number" [(ngModel)]="recipe.cookingTime" />
+      </mat-form-field>
+    </td>
+  </tr>
+ 
+  
+</table>
+
+<div class="example-button-row">
+  <button mat-raised-button color="accent" (click)="updateRecipe()">Save Recipe</button>
+</div>
+

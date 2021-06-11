@@ -1,0 +1,38 @@
+<h1 id="tableLabel">Add user</h1>
+
+
+<table class="example-full-width" cellspacing="0">
+  <tr>
+    <td>
+      <mat-form-field class="example-full-width">
+        <mat-label>rating ratingNr</mat-label>
+        <input matInput [(ngModel)]="rating.ratingNr" />
+      </mat-form-field>
+    </td>
+  </tr>
+  <tr>
+
+  <tr>
+    <td>
+      <mat-form-field class="example-full-width">
+        <mat-label>rating userID</mat-label>
+        <input matInput [(ngModel)]="rating.userID" />
+      </mat-form-field>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+      <mat-form-field class="example-full-width">
+        <mat-label>rating recipeID</mat-label>
+        <input matInput [(ngModel)]="rating.recipeID" />
+      </mat-form-field>
+    </td>
+  </tr>
+
+
+</table>
+
+<div class="example-button-row">
+  <button mat-raised-button color="accent" (click)="saveRating()">Save User</button>
+</div>

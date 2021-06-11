@@ -1,0 +1,24 @@
+.example-card {
+  max-width: auto;
+  background-color: dimgray !important;
+}
+
+.example-header-image {
+  background-size: cover;
+}
+
+.example-button-row {
+  margin-top: 20px;
+  width: auto;
+}
+
+.mat-icon-button.mat-primary {
+  color: #1a1a1a;
+}
+
+.mat-flat-button.mat-primary, .mat-raised-button.mat-primary, .mat-fab.mat-primary, .mat-mini-fab.mat-primary {
+  background-color: #313132;
+}
+
+
+

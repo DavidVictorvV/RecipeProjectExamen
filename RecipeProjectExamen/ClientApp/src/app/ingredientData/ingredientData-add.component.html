@@ -1,0 +1,40 @@
+<h1 id="tableLabel">Add user</h1>
+
+
+<table class="example-full-width" cellspacing="0">
+  <tr>
+    <td>
+      <mat-form-field class="example-full-width">
+        <mat-label>recipeID</mat-label>
+        <input matInput [(ngModel)]="ingredientData.recipeID" />
+      </mat-form-field>
+    </td>
+  </tr>
+  <tr>
+
+  <tr>
+    <td>
+      <mat-form-field appearance="fill" class="example-full-width">
+        <mat-label>Select</mat-label>
+        <mat-select placeholder="Ingredient" [(ngModel)]="ingredientData.ingredientID">
+          <span *ngFor="let ingredient of ingredients">
+            
+            <mat-option value="{{ingredient.id}}">{{ingredient.name}}</mat-option>
+          </span>
+        </mat-select>
+      </mat-form-field>
+    </td>
+  </tr>
+
+
+
+
+</table>
+
+<div class="example-button-row">
+  <button mat-raised-button color="accent" (click)="saveIngredientData()">Save Ingredient</button>
+</div>
+
+
+
+

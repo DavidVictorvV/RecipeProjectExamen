@@ -1,0 +1,45 @@
+<h1 id="tableLabel">Add user</h1>
+<mat-card style="text-align: center;">
+  <table class="example-full-width" cellspacing="0">
+    <tr>
+      <td>
+        <mat-form-field class="example-full-width">
+          <mat-label>User Name</mat-label>
+          <input matInput [(ngModel)]="name" />
+        </mat-form-field>
+      </td>
+    </tr>
+    <tr>
+
+    <tr>
+      <td>
+        <mat-form-field class="example-full-width">
+          <mat-label>User Username</mat-label>
+          <input matInput [(ngModel)]="username" />
+        </mat-form-field>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <mat-form-field class="example-full-width">
+          <mat-label>User Mail</mat-label>
+          <input matInput [(ngModel)]="mail" />
+        </mat-form-field>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <mat-form-field class="example-full-width">
+          <mat-label>User Password</mat-label>
+          <input matInput [(ngModel)]="password" />
+        </mat-form-field>
+      </td>
+    </tr>
+
+  </table>
+  <div class="example-button-row">
+    <button mat-raised-button color="accent" (click)="saveUserInfo()">Save User</button>
+  </div>
+</mat-card>

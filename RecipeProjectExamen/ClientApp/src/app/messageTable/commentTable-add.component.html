@@ -1,0 +1,54 @@
+<h1 id="tableLabel">Add user</h1>
+
+
+
+<table class="example-full-width" cellspacing="0">
+  <tr>
+    <td>
+      <mat-form-field class="example-full-width">
+        <mat-label>Comment msg</mat-label>
+        <input matInput [(ngModel)]="commentTableCreate.msg" />
+
+
+
+      </mat-form-field>
+
+    </td>
+  </tr>
+  <tr>
+
+  <tr>
+    <td>
+        <mat-form-field appearance="fill" class="example-full-width">
+          <mat-label>Recipe Name</mat-label>
+          <mat-select placeholder="Recipe Name" [(ngModel)]="commentTableCreate.recipeID">
+            <span *ngFor='let recipe of recipes'>
+
+              <mat-option value="{{recipe.id}}">{{recipe.recipeName}}</mat-option>
+            </span>
+          </mat-select>
+        </mat-form-field>
+    </td>
+  </tr>
+
+  <tr>
+    <td>
+
+      <mat-form-field appearance="fill" class="example-full-width">
+        <mat-label>User Name</mat-label>
+        <mat-select placeholder="User Name" [(ngModel)]="commentTableCreate.userID">
+          <span *ngFor='let user of users'>
+
+            <mat-option value="{{user.id}}">{{user.name}}</mat-option>
+          </span>
+        </mat-select>
+      </mat-form-field>
+
+    </td>
+  </tr>
+
+</table>
+
+<div class="example-button-row">
+  <button mat-raised-button color="accent" (click)="saveCommentTable()">Save User</button>
+</div>

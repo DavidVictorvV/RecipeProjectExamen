@@ -1,0 +1,341 @@
+<mat-card style="text-align: center;">
+
+  <div class="leftAling">
+    <button mat-raised-button color="primary" [routerLink]="['/recipeList']"><mat-icon>arrow_back</mat-icon></button>
+
+  </div>
+  <div *ngFor="let user of users">
+    <div *ngIf="user.loggedIn == true">
+      <div *ngIf="recipe.authorId == user.id">
+        <div class="rigthAling">
+          <a href="/recipe-update?id={{recipe.id}}">
+            <button mat-icon-button color="primary" matTooltip="Edit">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </a>
+          <button mat-icon-button color="primary" matTooltip="Delete" (click)="deleteRecipe(recipe)" aria-hidden="false">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br /><br />
+  <mat-card-title>
+    <mat-card-title><u>{{ recipe.recipeName }}</u>:</mat-card-title>
+  </mat-card-title>
+
+
+  <div class="leftAling">
+    <mat-card-header>
+      <mat-card-title>Recipe Summary </mat-card-title>
+      <mat-card-subtitle>{{ recipe.recipeSummary }}</mat-card-subtitle>
+    </mat-card-header>
+  </div>
+
+  <div class="centerAling2">
+    <mat-card-title>
+      <mat-card-title>Recipe Image</mat-card-title>
+      <mat-card-subtitle><img src="{{recipe.imageLink}}" width="180" height="180"></mat-card-subtitle>
+    </mat-card-title>
+  </div>
+
+  <div class="leftAling">
+    <mat-card-title>
+      <mat-card-title>Author Name</mat-card-title>
+      <mat-card-subtitle>
+
+
+        <div *ngFor="let user of users">
+          <div *ngIf="recipe.authorId == user.id">
+            {{user.name}} ({{user.username}})
+          </div>
+        </div>
+
+
+      </mat-card-subtitle>
+    </mat-card-title>
+  </div>
+
+
+
+  <div class="rigthAling">
+    <mat-card-title>
+      <mat-card-title>Recipe Rating</mat-card-title><mat-card-subtitle>
+        <div *ngIf="average(recipe) == 0 || average(recipe) == 'empty'">
+          <b>No ratings yet...</b>
+        </div>
+        <div *ngIf="average(recipe) != 0 && average(recipe) && average(recipe) != 'empty' ">
+          <span *ngFor='let in of counter(average(recipe)) ;let i = index'>
+            <i class="fa fa-star"></i>
+          </span>
+        </div>
+
+      </mat-card-subtitle>
+    </mat-card-title>
+  </div>
+
+
+  <div class="centerAling">
+    <mat-card-title>
+      <mat-card-title>Average Time</mat-card-title>
+      <mat-card-subtitle>{{ recipe.cookingTime }} min</mat-card-subtitle>
+    </mat-card-title>
+  </div>
+
+
+
+
+  <mat-card-title>
+    <mat-card-title>Recipe Details</mat-card-title>
+    <mat-card-subtitle>{{ recipe.recipeDetails }}</mat-card-subtitle>
+  </mat-card-title>
+
+
+  <span *ngIf="test">
+    <div *ngIf="!testUserRating()">
+      <div class="rigthAling">
+        <b>Add a rating:</b>
+        <div class="row">
+          <div class="col-sm-12">
+            <ul class="list-inline rating-list" *ngFor="let star of stars" style="display: inline-block">
+              <li (click)="countStar(star)"
+                  [ngClass]="{'selected': (star <= selectedValue)}">
+                <i class="fa fa-star"></i>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </span>
+
+  <span *ngIf="test">
+    <div *ngIf="testUserRating()">
+      <div class="rigthAling">
+        <mat-card-title>Your rating:</mat-card-title>
+        <mat-card-subtitle>
+
+          <div *ngFor="let rating of ratings">
+            <div *ngIf="rating.recipeID == recipe.id">
+              <div *ngFor="let user of users">
+                <div *ngIf="user.loggedIn == true">
+                  <div *ngIf="rating.userID == user.id">
+                    <button mat-icon-button color="primary" matTooltip="Delete" (click)="deleteRating(rating)" aria-hidden="false">
+                      <span *ngFor='let in of counter(rating.ratingNr) ;let i = index'>
+                        <i class="fa fa-star"></i>
+                      </span>
+                    </button>
+
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </mat-card-subtitle>
+      </div>
+    </div>
+  </span>
+
+  <mat-card-header>
+    <mat-card-title>Ingredients</mat-card-title>
+    <mat-card-subtitle>
+
+      <div *ngFor="let ingredientData of ingredientsData">
+        <div *ngIf="ingredientData.recipeID ==  recipe.id">
+          <div *ngFor="let ingredient of ingredients">
+            <div *ngIf="ingredient.id ==  ingredientData.ingredientID">
+              {{ingredientData.quantity}} - {{ingredient.name}}
+
+              <span *ngFor="let user of users">
+                <span *ngIf="user.loggedIn == true">
+                  <span *ngIf="recipe.authorId == user.id">
+                    <button mat-icon-button color="primary" matTooltip="Delete" (click)="deleteIngredientData(ingredientData)" aria-hidden="false">
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                  </span>
+                </span>
+              </span>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+    </mat-card-subtitle>
+  </mat-card-header>
+
+
+  <div *ngFor="let user of users">
+    <div *ngIf="user.loggedIn == true">
+      <div *ngIf="recipe.authorId == user.id">
+
+        <mat-card-header>
+          <mat-card-subtitle>
+            <mat-form-field class="example-some-width">
+              <mat-label>Quantity</mat-label>
+              <input maxlength="20" matInput [(ngModel)]="ingredientData.quantity" />
+            </mat-form-field>
+            <mat-form-field class="example-some-width">
+              <mat-label>Add ingredient</mat-label>
+              <mat-select placeholder="Ingredient" [(ngModel)]="ingredientData.ingredientID">
+                <span *ngFor="let ingredient of ingredients">
+                  <mat-option value="{{ingredient.id}}" data-toggle="tooltip" title="{{ingredient.details}}">{{ingredient.name}}</mat-option>
+                </span>
+              </mat-select>
+            </mat-form-field>
+            <button mat-raised-button color="default" (click)="saveIngredientData()">+</button>
+          </mat-card-subtitle>
+        </mat-card-header>
+
+      </div>
+    </div>
+  </div>
+</mat-card>
+
+
+<style>
+  div.galleryShow {
+    background: darkgray;
+    margin: 5px;
+    border: 1px solid #ccc;
+    float: left;
+    width: 200px;
+    text-align: center;
+    color: black;
+  }
+
+    div.galleryShow:hover {
+      border: 1px solid #777;
+    }
+
+
+  div.ratingGal {
+    padding: 15px;
+    text-align: center;
+    color: black;
+  }
+</style>
+
+<br />
+<button mat-raised-button color="default" (click)="commentPeopleRecipes()">Recipes by people who commented</button>
+<div *ngFor="let recipe of commentRecipes">
+  <a [routerLink]="['/recipeList-read',recipe.id]">
+    <div class="galleryShow">
+      {{recipe.recipeName}}<br />
+      <img src="{{recipe.imageLink}}" width="180" height="180">
+      <div class="ratingGal">
+        <div *ngIf="average(recipe) == 0 || average(recipe) == 'empty'">
+          <b>No ratings yet...</b>
+        </div>
+        <div *ngIf="average(recipe) != 0 && average(recipe) && average(recipe) != 'empty' ">
+          <span *ngFor='let in of counter(average(recipe)) ;let i = index'>
+            <i class="fa fa-star"></i>
+          </span>
+        </div>
+      </div>
+    </div>
+    </a>
+</div>
+
+
+<div *ngIf="foundRecipes">
+  <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+</div>
+
+<br/>
+<h2>
+  Chat Messages <mat-icon> insert_comment </mat-icon>
+</h2>
+
+
+
+<div *ngIf="sortVar()">
+  <div *ngFor="let commentTable of newMsgTable">
+    <div *ngIf="commentTable.recipeID == recipe.id">
+      <div *ngFor="let user of users">
+        <div *ngIf="commentTable.userID == user.id">
+          <div class="container">
+            <div *ngIf="user.loggedIn == true" class="time-right">
+              <a href="/commentTable-update?id={{commentTable.id}}">
+                <button mat-icon-button color="primary" matTooltip="Edit">
+                  <mat-icon>edit</mat-icon>
+                </button>
+              </a>
+              <button mat-icon-button color="primary" matTooltip="Delete" (click)="deleteComment(commentTable)" aria-hidden="false">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div><b>
+              {{user.name}}
+              ({{user.username}}):
+            </b>
+            <br />
+            <div class="text-color">
+              <i>
+                {{commentTable.msg}}
+              </i>
+            </div>
+            <span class="rating-right">
+              (user rating:
+              <span *ngFor="let rating of ratings">
+                <span *ngIf="rating.recipeID == recipe.id">
+                  <span *ngIf="rating.userID == user.id">
+                    <span *ngFor='let in of counter(rating.ratingNr) ;let i = index'>
+                      <i class="fa fa-star"></i>
+                    </span>
+                  </span>
+                </span>
+              </span>)
+            </span>
+            <br />
+            <span class="time-right">
+              {{commentTable.sentDate  | date:'short' : 'UTC+6'}}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="gallery">
+  <b>Add a comment:</b>
+  <span *ngIf="test">
+    <table class="example-full-width" cellspacing="0">
+      <tr>
+        <td>
+          <mat-form-field class="example-full-width">
+            <mat-label>Write a new comment (max: 2000 characters)</mat-label>
+            <input maxlength="2000" matInput [(ngModel)]="commentTableCreate.msg" />
+          </mat-form-field>
+        </td>
+      </tr>
+    </table>
+    <button mat-raised-button color="accent" (click)="saveCommentTable()">Send</button>
+  </span>
+  <span *ngIf="!test">
+    <table class="example-full-width" cellspacing="0">
+      <tr>
+        <td>
+          <mat-form-field class="example-full-width">
+            <mat-label>Log in to write message</mat-label>
+            <input maxlength="2000" matInput [(ngModel)]="commentTableCreate.msg" readonly="readonly" />
+          </mat-form-field>
+        </td>
+      </tr>
+    </table>
+  </span>
+</div>
+
+
+
+
+<div *ngIf="sortVar()">
+
+</div>
